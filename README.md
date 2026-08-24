@@ -112,6 +112,14 @@ prompt: Copy:facbed=
 reward: 1 for generating f; 0 for a, b, c, d, e, g, or h
 ```
 
+The rule is: **output the first character after `Copy:`**. The reward function,
+not the model, identifies `f` as correct because it is the first character
+after the colon. The model begins with about `1/8` probability on each of the
+eight actions. For this prompt, expected reward equals
+`P(f | Copy:facbed=)`, so optimization increases that probability. Across 512
+training prompts with different first characters, the model learns the copying
+policy; evaluation uses 256 separate prompts.
+
 The RL metric is reward gap, `1 - mean reward`; lower is better. This is exact
 reward-based policy optimization over eight possible character actions. It is
 not RLHF, PPO, or GRPO.
