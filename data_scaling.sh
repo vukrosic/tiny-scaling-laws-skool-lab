@@ -2,4 +2,4 @@
 set -euo pipefail
 
 cd "$(dirname "$0")"
-exec ./run_lab.sh capacity "$@"
+exec ./run_lab.sh data "$@"

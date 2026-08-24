@@ -26,7 +26,18 @@ jobs:
       - name: Check the public command on macOS and Linux
         if: runner.os != 'Windows'
         run: ./first_win.sh --widths 4,6,8 --seeds 1 --pretrain-steps 2 --rl-steps 2 --batch-size 4 --image smoke.png --receipt smoke.json --no-open
+      - name: Check additional studies on macOS and Linux
+        if: runner.os != 'Windows'
+        run: |
+          ./training_budget.sh --seeds 1 --pretrain-budgets 1,2,3 --rl-budgets 1,2,3 --base-pretrain-steps 2 --batch-size 4 --image budget-smoke.png --receipt budget-smoke.json --no-open
+          ./data_scaling.sh --seeds 1 --pretrain-data-lines 3,4,5 --rl-data-sizes 4,8,16 --base-pretrain-steps 2 --base-rl-steps 2 --batch-size 4 --image data-smoke.png --receipt data-smoke.json --no-open
       - name: Check the public command on Windows
         if: runner.os == 'Windows'
         shell: cmd
         run: first_win.bat --widths 4,6,8 --seeds 1 --pretrain-steps 2 --rl-steps 2 --batch-size 4 --image smoke.png --receipt smoke.json --no-open
+      - name: Check additional studies on Windows
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          training_budget.bat --seeds 1 --pretrain-budgets 1,2,3 --rl-budgets 1,2,3 --base-pretrain-steps 2 --batch-size 4 --image budget-smoke.png --receipt budget-smoke.json --no-open
+          data_scaling.bat --seeds 1 --pretrain-data-lines 3,4,5 --rl-data-sizes 4,8,16 --base-pretrain-steps 2 --base-rl-steps 2 --batch-size 4 --image data-smoke.png --receipt data-smoke.json --no-open

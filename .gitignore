@@ -3,5 +3,9 @@ __pycache__/
 *.pyc
 my_scaling_laws.png
 my_scaling_laws.json
+my_training_budget_scaling.png
+my_training_budget_scaling.json
+my_data_scaling.png
+my_data_scaling.json
 results/
 .DS_Store
