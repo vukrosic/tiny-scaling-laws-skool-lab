@@ -76,6 +76,17 @@ RL:          16 unique prompts → 66.6% gap; 512 → 12.1% gap
 This experiment holds the number of optimizer updates fixed. It changes the
 available data pool, not the number of sampled training batches.
 
+## What changes and what stays fixed
+
+| Level | Changed variable | Fixed controls | Not fixed |
+|---|---|---|---|
+| 1. Model capacity | Transformer residual width and parameter count | Data and splits, context length, sampled batches within each seed, 30 pretraining updates, 50 RL updates, batch size 32, learning rates, evaluator, and seeds | Computation and runtime: wider models cost more per update |
+| 2. Training budget | Number of optimizer updates | Width 16, data and splits, batch size 32, learning rates, evaluator, and seeds | Computation and runtime: more updates deliberately use more compute |
+| 3. Data size | Available pretraining characters or unique RL prompts | Width 16, 30 pretraining updates, 50 RL updates, batch size 32, validation/evaluation sets, learning rates, and seeds | The sampled training pool, which is the variable being tested |
+
+Level 1 is **update-matched, not compute-matched**: every model receives the
+same number of updates, but a larger model performs more operations per update.
+
 ## Submit each experiment in Skool
 
 Before running, write a prediction. After running, upload the generated PNG and
